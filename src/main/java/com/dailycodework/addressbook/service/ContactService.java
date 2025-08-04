@@ -63,7 +63,7 @@ public class ContactService implements IContactService {
     }
 
     @Override
-    public List<Contact> getAllContacts() {
+    public List<Contact> getContacts() {
         return contactRepository.findAll();
     }
 }
