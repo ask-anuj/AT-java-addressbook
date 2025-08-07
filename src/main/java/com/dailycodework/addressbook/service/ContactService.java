@@ -25,27 +25,28 @@ public class ContactService implements IContactService {
             updateContactFields(existingContact, contact);
             updateAddress(existingContact, contact.getAddress());
             return contactRepository.save(existingContact);
-        }).orElseThrow(() -> new EntityNotFoundException("No contact found with id: " + id));
-    }
-
-    private void updateContactFields(Contact existingContact, Contact newContact) {
-        existingContact.setFirstName(newContact.getFirstName());
-        existingContact.setLastName(newContact.getLastName());
-    }
-
-    private void updateAddress(Contact existingContact, Address newAddress) {
-        if (newAddress != null) {
-            Address existingAddress = existingContact.getAddress();
-            if (existingAddress != null) {
-                existingAddress.setCountry(newAddress.getCountry());
-                existingAddress.setState(newAddress.getState());
-                existingAddress.setCity(newAddress.getCity());
-                existingAddress.setAddress(newAddress.getAddress());
-                existingAddress.setAddress(existingAddress);
-            } else {
-                existingContact.setAddress(newAddress);
-            }
+            //}).orElseThrow(() -> new EntityNotFoundException("No contact found with id: " + id));
+        }).orElse(null);
         }
+
+        private void updateContactFields(Contact existingContact, Contact newContact) {
+            existingContact.setFirstName(newContact.getFirstName());
+            existingContact.setLastName(newContact.getLastName());
+        }
+
+         private void updateAddress(Contact existingContact, Address newAddress) {
+             if (newAddress != null) {
+                 Address existingAddress = existingContact.getAddress();
+                 if (existingAddress != null) {
+                     existingAddress.setCountry(newAddress.getCountry());
+                     existingAddress.setState(newAddress.getState());
+                     existingAddress.setCity(newAddress.getCity());
+                     existingAddress.setAddress(newAddress.getAddress());
+                     existingContact.setAddress(existingAddress);
+                 } else {
+                     existingContact.setAddress(newAddress);
+                 }
+             }
 
     }
 
