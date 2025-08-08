@@ -35,7 +35,7 @@ public class ContactController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteContact(@RequestParam Long id) {
+    public ResponseEntity<String> deleteContact(@PathVariable Long id) {
         contactService.deleteContact(id);
         return ResponseEntity.ok("Contact deleted successfully!");
     }
